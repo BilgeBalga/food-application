@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: red;
+  padding: 10px;
+  color: white;
+}
+
+.navbar-left {
+  flex: 1;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-text {
+  margin-right: 20px;
+  cursor: pointer;
+  margin-left: 100px;
+  color: white;
+}
+
+.navbar-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  cursor: pointer;
+}
