@@ -1,7 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './header.css';
+import '../styles/custom.scss';
 
+import user from '../assets/user-icon.png';
+import shoppingCart from '../assets/shopping-cart.png';
 
 function Header() {
 
@@ -26,13 +29,13 @@ function Header() {
                 <div className="navbar-right">
                     <img
                         className="navbar-icon"
-                        src= '../../assets/user-icon.png'
+                        src= {user}
                         alt="Profile"
                         onClick={handleProfileClick}
                     />
                     <img
                         className="navbar-icon"
-                        src="../src/assets/shopping-cart.png"
+                        src= {shoppingCart}
                         alt="Cart"
                         onClick={handleCartClick}
                     />

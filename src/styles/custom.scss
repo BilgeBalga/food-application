@@ -1,0 +1,40 @@
+// custom.scss
+
+// Bootstrap değişkenlerini özelleştirme
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+
+
+// Bootstrap stil dosyasını içe aktarma
+@import '~bootstrap/scss/bootstrap';
+
+// Özelleştirilmiş stilleri ekleme
+
+
+//HEADER css
+.navbar-text{
+  margin-right: 20px;
+  cursor: pointer;
+  margin-left: 100px;
+  color: white;
+}
+
+
+
+//BASKET css
+
+.card-mx-auto-adres{
+    align-items: center;
+    justify-content:center;
+    text-align: center;
+}
+
+.card-title-odeme{
+    text-align: center;
+    justify-content:center;
+}
+
+.flexRadioDefault2{
+    color:red;
+}
+

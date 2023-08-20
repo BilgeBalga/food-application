@@ -1,0 +1,39 @@
+hr{
+    background-color: #f60000;
+}
+
+
+
+.navbar-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: black;
+}
+  
+
+
+
+
+/* .container {
+    display: inline-flex;
+    margin-top: 1px;
+    width: 70%;
+    height: 400px;
+    position: relative;
+}
+
+.items{ 
+    max-height: 100%;
+    overflow: auto;
+    border: 1px;
+    scrollbar-width: 1px;
+}
+
+.product{
+    height: 1500px;
+    border: 5px;
+    solid :yellow
+} */
+
