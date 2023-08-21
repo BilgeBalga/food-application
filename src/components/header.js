@@ -1,5 +1,7 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import  './header.css';
+
 
 import user from '../assets/user-icon.png';
 import shoppingCart from '../assets/shopping-cart.png';
