@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/basket.css';
 
@@ -25,23 +25,41 @@ function Basket() {
     const addresses = [
         { il: "Antalya", ilce: "Kepez", adres: "pınarbaşı mah teknokent" },
         { il: "Antalya", ilce: "Muratpaşa", adres: "pınarbaşı mah teknokent" },
+        { il: "Antalya", ilce: "Muratpaşa", adres: "pınarbaşı mah teknokent" },
 
     ];
+
+    const [productQuantities, setProductQuantities] = useState(
+        basket.map(() => 1)
+    );
+
+    const handleIncrease = (index) => {
+        const updatedQuantities = [...productQuantities];
+        updatedQuantities[index] += 1;
+        setProductQuantities(updatedQuantities);
+    };
+
+    const handleDecrease = (index) => {
+        const updatedQuantities = [...productQuantities];
+        if (updatedQuantities[index] > 1) { //1'den az olamaz!
+            updatedQuantities[index] -= 1;
+            setProductQuantities(updatedQuantities);
+        }
+    };
 
 
     return (
         <Container>
             <Row className='row-md-6'>
-                <Col className='col-md-8' >
+                <Col className='col-md-8' style={{ overflowY: 'auto', maxHeight: '900px' }} >
                     {basket.map((item, index) => (
-
                         <>
-                            <Row key={index}>
-                                <Image  /* className='w-0'  */ src={Burger} alt="burger" thumbnail style={{ width: '28%' }} fluid />
-                                <Col className='col-md-4 mx-auto'>
-                                    <div>
+                            <Row key={index}  >
+                                <Image src={Burger} alt="burger" thumbnail style={{ width: '28%' }} fluid />
+                                <Col className='col-md-4 mx-auto' >
+                                    <div >
                                         <h3>{item.name} </h3>
-                                        <hr color='#ff2400' size='30' />
+                                        <hr />
                                         <p>{item.description}</p>
                                         <p>Price: ₺{item.price}</p>
 
@@ -51,21 +69,19 @@ function Basket() {
 
                                 <Col className='col-md-2'>
                                     <Row>
-                                        <Image src={Minus} alt="Trash" thumbnail style={{ width: '35%' }} />
-                                        1
-                                        <Image src={Plus} alt="Trash" thumbnail style={{ width: '35%' }} />
+                                        <Image src={Minus} alt="Trash" thumbnail style={{ width: '35%' }} onClick={() => handleDecrease(index)} />
+                                        {productQuantities[index]}
+                                        <Image src={Plus} alt="Trash" thumbnail style={{ width: '35%' }} onClick={() => handleIncrease(index)} />
                                     </Row>
                                 </Col>
 
-                                <Col className='col-md-2 mx-auto align-items-center justify-content-center'>
-
-
-                                    <Image /* className='w-0'  */ src={Trash} alt="Trash" thumbnail style={{ width: '35%' }} />
+                                <Col className='col-md-2'>
+                                    <Image src={Trash} alt="Trash" thumbnail style={{ width: '35%' }} />
                                 </Col>
 
 
                             </Row>
-                            <hr />
+                            {/*  <hr /> */}
 
 
                         </>
@@ -73,61 +89,85 @@ function Basket() {
                     ))}
 
                     <Row className='row-md-6'>
+                        <hr />
                         <h2>Kayıtlı Adresler</h2>
+                        <hr className='adres-hr' />
                         {addresses.map((item, index) => (
-                            <Col key={index} className=' mx-auto'>
+                            <Col key={index}>
                                 <Container>
                                     {/* Seçilen adresin borderı danger kalanlarınki border-light */}
-                                    <div className="card mb-3" >
-                                        <div className="card" >
-                                            <Image /* className='w-0'  */ src={Home} alt="Home" thumbnail style={{ width: '15%' }} />
+                                    <div className="card mb-3-address" >
+                                        <div className="card-address-card" >
+                                            <Image src={Home} alt="Home" thumbnail />
                                         </div>
+
                                         <hr />
+
                                         <div className="card-body">
-                                            <h5 className="card-title-a">{item.il}</h5>
-                                            <p className="card-text">{item.ilce}</p>
+                                            <p className="card-text">{item.adres}</p>
+                                            <p className="card-text">{item.ilce} / {item.il} </p>
+                                            <button seç />
                                         </div>
                                     </div>
                                 </Container>
                             </Col>
                         ))}
+                        {/* 
+                            ADRES EKLE
+                        */}
 
                     </Row>
                     <hr />
                     <Row>
                         <Col className='col-md-4'>
-                            <div className="card border-danger mb-3" >
-                                <div className="card-mx-auto-odeme align-items-center justify-content-center" >
-                                    <h5 className="card-title">Ödeme yöntemi seçiniz</h5>
+                            <div className="card border mb-3" >
+                                <div className="card-odeme-card" >
+                                    <h5 className="card-title">Ödeme yöntemi</h5>
+
                                 </div>
                                 <hr />
                                 <div className="card-body">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Kapıda Nakit
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             Kapıda Kredi Kartı
                                         </label>
                                     </div>
-                                    <p className="card-text"></p>
+
                                 </div>
                             </div>
                         </Col>
-                        <Col className='col-md-8' >
-                            <input placeholder='SİPARİŞ NOTU GİRİNİZ FORM' />
+                        <Col className='col-md-8-input-col' >
+                            <input placeholder='SİPARİŞ NOTU GİRİNİZ FORM' id='input-col'
+                            />
                         </Col>
                     </Row>
 
                 </Col>
 
 
-                <Col className='col-md-4' >
-                  Siparis ozeti
+                <Col className='col-md-4-ozet-col'>
+
+                    <div class="container-md-siparis">
+                        Sipariş Özeti
+                        <hr />
+                            <Row>
+                            SEÇİLEN ADRESİ GÖSTER
+                               {/*  <Col> 
+                               <button type="button" class="btn btn-warning">Alışverişe Dön</button>
+                               <button type="button" class="btn btn-warning">Sepeti Onayla</button>
+                               </Col> */}
+                            </Row>
+                   
+
+                    </div>
+
                 </Col>
 
 
