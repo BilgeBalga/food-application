@@ -1,7 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './header.css';
-import '../styles/custom.scss';
 
 import user from '../assets/user-icon.png';
 import shoppingCart from '../assets/shopping-cart.png';
@@ -20,8 +18,9 @@ function Header() {
 
 
     return (
+
         <>
-            <div className="navbar">
+            <header className="navbar">
                 <div className="navbar-left">
                     <span className="navbar-text">BURGER BRAND</span>
                 </div>
@@ -39,11 +38,10 @@ function Header() {
                         onClick={handleCartClick}
                     />
                 </div>
-            </div>
+            </header>
 
         </>
     )
 }
 
 export default Header
-

@@ -2,7 +2,7 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Header from './components/header';
+import Header from './components/Header';
 import Basket from './pages/Basket';
 
 function App() {
