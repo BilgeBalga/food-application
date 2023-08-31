@@ -30,9 +30,9 @@ function Basket() {
     ];
 
     const addresses = [
-        /*         { il: "Antalya", ilce: "Kepez", adres: "pınarbaşı mah teknokent" },
-                { il: "Antalya", ilce: "Muratpaşa", adres: "Lorem ipsum lorem ipsum ipsum ipsum" },
-                  { il: "Antalya", ilce: "Muratpaşa", adres: "pınarbaşı mah teknokent" },   */
+      /*    { il: "Antalya", ilce: "Kepez", adres: "pınarbaşı mah teknokent" },
+        { il: "Antalya", ilce: "Muratpaşa", adres: "Lorem ipsum lorem ipsum ipsum ipsum" },
+       { il: "Antalya", ilce: "Muratpaşa", adres: "pınarbaşı mah teknokent" },  */
     ];
 
 
@@ -97,61 +97,72 @@ function Basket() {
                         <hr />
                         <h2>Kayıtlı Adresler</h2>
                         <hr className='adres-hr' />
-                        {addresses.length == 0 ? ( //Adres boş ise
-                            <Col>
+                        {addresses.map((item, index) => (
+                            <Col key={index}>
                                 <Container>
-                                    <Col >
-                                        <div className="card mb-3-address">
-                                            <div className="card-zero-address" onClick={handleShowModal}>
-                                                <Image src={Plus2} alt="Plus" thumbnail />
-                                                <p >Adres Ekle</p>
-                                            </div>
+                                    <div
+                                        className={`card mb-3-address ${selectedAddressIndex === index ? 'selected' : ''} `}
+                                        onClick={() => setSelectedAddressIndex(index)}>
+                                        <div className="card">
+                                            <Image className="card-address-card" src={Home} alt="Home" thumbnail />
                                         </div>
-                                    </Col>
+                                        <hr />
+                                        <div className="card-body">
+                                            <p className="card-text">{item.adres}</p>
+                                            <p className="card-text">{item.ilce} / {item.il} </p>
+                                        </div>
+                                    </div>
                                 </Container>
                             </Col>
-                        ) : (
-                            addresses.map((item, index) => (
-                                <Col key={index}>
-                                    <Container>
-                                        { /* Seçilen adresin borderı danger kalanlarınki border-light */}
-                                        <div
-                                            className={`card mb-3-address ${selectedAddressIndex === index ? 'selected' : ''} `}
-                                            onClick={() => setSelectedAddressIndex(index)}>
-                                            <div className="card">
-                                                <Image className="card-address-card" src={Home} alt="Home" thumbnail />
-                                            </div>
-                                            <hr />
-                                            <div className="card-body">
-                                                <p className="card-text">{item.adres}</p>
-                                                <p className="card-text">{item.ilce} / {item.il} </p>
-                                            </div>
-                                        </div>
-                                    </Container>
-                                </Col>
-
-                            ))
-                        )}
-
-                        {/*   {
-                            addresses.length === 0 ? '' :
-                                <Col>
-                                    <Container>
-                                        <Col>
-                                            <div className="card mb-3-address">
-                                                <div className="card-address-card" onClick={handleShowModal} >
-                                                    <Image src={Plus2} alt="Plus" thumbnail />
-                                                    <p >Adres Ekle</p>
-
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </Container>
-                                </Col>
-                        } */}
+                        ))}
+                        <Col>
+                            <Container>
+                                <div className="card mb-3-address">
+                                    <div className="card-zero-address" onClick={handleShowModal}>
+                                        <Image src={Plus2} alt="Plus" thumbnail />
+                                        <p >Adres Ekle</p>
+                                    </div>
+                                </div>
+                            </Container>
+                        </Col>
                     </Row>
-                    {/* Modal */}
-                    <Modal show={showModal} onHide={handleCloseModal}>
+                             {/* Modal */}
+                             <Modal show={showModal} onHide={handleCloseModal}>
+                        <Modal.Header closeButton style={{ backgroundColor: 'red', color: 'white' }}>
+                            <Modal.Title>Adres Ekle</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form onSubmit={handleFormSubmit}>
+                                <Form.Group controlId="addressTitle" >
+                                    <Form.Label>Adres Başlığı</Form.Label>
+                                    <Form.Control className='address-input' type="text" placeholder="Adres Başlığı" />
+                                </Form.Group>
+                                <Form.Group controlId="address" style={{ paddingTop: '5px', marginTop: '5px' }} >
+                                    <Form.Label>Adres</Form.Label>
+                                    <Form.Control className='address-input' type="text" placeholder="Adres" />
+                                </Form.Group>
+                                <Row>
+                                    <Col>
+                                        <Form.Group controlId="city" style={{ paddingTop: '5px', marginTop: '5px' }}>
+                                            <Form.Label>İl</Form.Label>
+                                            <Form.Control className='address-input' type="text" placeholder="İl" />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
+                                        <Form.Group controlId="district" style={{ paddingTop: '5px', marginTop: '5px' }}>
+                                            <Form.Label>İlçe</Form.Label>
+                                            <Form.Control className='address-input' type="text" placeholder="İlçe" />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Button variant="danger" type="submit" style={{ paddingTop: '5px', marginTop: '5px' }}>
+                                    Adresi Kaydet
+                                </Button>
+                            </Form>
+                        </Modal.Body>
+                    </Modal>
+                              {/* Modal */}
+                              <Modal show={showModal} onHide={handleCloseModal}>
                         <Modal.Header closeButton style={{ backgroundColor: 'red', color: 'white' }}>
                             <Modal.Title>Adres Ekle</Modal.Title>
                         </Modal.Header>
@@ -230,14 +241,14 @@ function Basket() {
                                     </div>
                                 ) : (
                                     <div>
-                                    <p>Bir adres seçilmedi.</p>
+                                        <p>Bir adres seçilmedi.</p>
                                     </div>
                                 )}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                
+
                             </Col>
                         </Row>
                         <Row>
